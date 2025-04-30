@@ -24,6 +24,11 @@ const transporter = nodemailer.createTransport({
 const signupUser = async(req, res) => {
     //gets username,email,password.
     const { username,email,password } = req.body;
+
+    if (!username || !email || !password) {
+        return res.status(400).json({ error: 'All fields are required' });
+    }
+
     const exists= users.some(user => user.email == email);
     //email is checked in case a user with the email already exists
     if(exists)
@@ -90,6 +95,11 @@ const loginUser = async(req, res) => {
 
     //gets email and password from user
     const {email,password}=req.body;
+
+    if (!email || !password) {
+        return res.status(400).json({ error: 'All fields are required' });
+    }
+
     const user = users.find(u => u.email == email);
     //if user with the given email found and his email verified.
     if(user && user.isVerified)
@@ -116,6 +126,10 @@ const loginUser = async(req, res) => {
 const changePassword = async(req, res) => {
     //gets current password and new password from user.
     const {currPass,newPass}=req.body;
+
+    if ( !currPass|| !newPass) {
+        return res.status(400).json({ error: 'All fields are required' });
+      }
     const email=req.data; //stored in middleware(fetched from token)
     const user=users.find(u=> u.email==email);
 
@@ -144,6 +158,9 @@ const changePassword = async(req, res) => {
 
 const forgotPassword= async(req,res)=>{
     const {email}=req.body;
+    if (!email) {
+        return res.status(400).json({ error: 'Email is required' });
+      }
     const user= users.find(u=> u.email==email);
    
     if(!user)
@@ -187,6 +204,9 @@ const forgotPassword= async(req,res)=>{
 const resetPassword= async(req,res)=>{
     const {token}=req.query;
     const {newPass}=req.body; //gets new password from user
+    if (!newPass) {
+        return res.status(400).json({ error: 'New Password required' });
+    }
     try{
         const {email}=jwt.verify(token,JWT_SECRET);
         const user = users.find(u => u.email == email);
