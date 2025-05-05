@@ -252,5 +252,4 @@ module.exports = {
   changePassword,
   forgotPassword,
   resetPassword,
-  users
 };
