@@ -8,9 +8,9 @@ const { authenticateUser }=require('../middlewares/authMiddleware');
 router.post('/signup', signupUser);
 router.get('/verify',verifyUser);
 router.post('/login', loginUser);
-router.patch('/changePassword',authenticateUser,changePassword);
-router.post('/forgotPassword',forgotPassword);
-router.patch('/resetPassword',resetPassword);
+router.patch('/change-password',authenticateUser,changePassword);
+router.post('/forgot-password',forgotPassword);
+router.patch('/reset-password',resetPassword);
 
 module.exports = router;
 
