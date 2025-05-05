@@ -6,6 +6,7 @@ require('dotenv').config();
 
 const JWT_SECRET=process.env.JWT_SECRET;
 const PORT=process.env.PORT;
+const Password=process.env.PASSWORD;
 
 //mock db
 users = [];
@@ -15,7 +16,7 @@ const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
       user: 'rafimoqaddus@gmail.com',
-      pass: 'xgcw nrpi klyd lght', //generated for this app.
+      pass: Password, //generated for this app.
     },
   });
 
